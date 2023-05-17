@@ -1,4 +1,4 @@
-public class Epic {
+public class Epic extends Task {
     protected String[] subtask;
 
     public Epic(int id, String[] subtask) {
@@ -6,5 +6,17 @@ public class Epic {
         this.subtask = subtask;
     }
 
+    public String[] getSubtask() {
+        return subtask;
+    }
 
+    @Override
+    public boolean matches(String query) {
+        for (String subtask : subtask) {
+            if (subtask.contains(query)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
