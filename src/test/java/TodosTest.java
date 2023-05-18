@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 public class TodosTest {
     SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
-    String[] subtasks = { "Молоко", "Яйца", "Хлеб" };
+    String[] subtasks = { "Молоко", "Яйца", "Хлеб", "Приложение" };
     Epic epic = new Epic(55, subtasks);
     Meeting meeting = new Meeting(
             555,
@@ -66,7 +66,7 @@ public class TodosTest {
     }
 
     @Test
-    public void shouldSearchMeeting() {
+    public void shouldSearchQueryMeeting() {
 
         Task[] expected = {meeting};
         Task[] actual = todos.search("Выкатка");
@@ -81,4 +81,19 @@ public class TodosTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void shouldSearchQueryMultiplTasks() {
+
+        Task[] expected = {epic, meeting};
+        Task[] actual = todos.search("Приложение");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchQueryEmptyTask() {
+
+        Task[] expected = {};
+        Task[] actual = todos.search("завтра");
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
